@@ -1,0 +1,27 @@
+(await ethers.provider.getTransactionReceipt("0xfaa3affe2d8c1611242e41a574e79060c8ba103173979a684220c9cc9f95c5c5")).blockNumber
+npx hardhat console --network basegoerli
+);console.log("Deployed in block:", deployTx.blockNumber);
+const deployTx = await ethers.provider.getTransact  "0xfaa3affe2d8c1611242e41a574e79060c8ba103173979a684220c9cc9f95c5c5"
+const deployTx = await ethers.provider.getTransactconsole.log("Deployed in block:", deployTx.blockNumber);
+console.log("Deployed in block:", deployTx.blockNumber);
+);
+  "0xfaa3affe2d8c1611242e41a574e79060c8ba103173979a684220c9cc9f95c5c5"
+const deployTx = await ethers.provider.getTransaction
+// Replace with your actual commit transaction hash:
+console.log("Deployed in block:", deployTx.blockNumber);
+const deployTx = await ethers.provider.getTransactionReceipt("<your_deploy_tx_hash>");
+console.log("Past commit
+const events = await bridge.queryFilter(bridge.filters.ReserveCommitted());
+console.log("Contract at:", bridge.address);
+onsole.log("Contract at:", bridge.address);
+);
+  "0xA1c58B2ae874Fbe9956CA1593e61da9b73ACf3c7"
+  "BaseBridge",
+const bridge = await ethers.getContractAt(
+console.log("Past commits:", events);
+const events = await bridge.queryFilter(bridge.filters.ReserveCommitted());
+console.log("Contract at:", bridge.address
+);
+  "0xA1c58B2ae874Fbe9956CA1593e61da9b73ACf3c7"
+  "BaseBridge",
+const bridge = await ethers.getContractAt(

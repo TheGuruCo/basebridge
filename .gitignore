@@ -1,0 +1,5 @@
+﻿node_modules/
+.env
+.env.local
+/build
+/netlify/functions/node_modules/

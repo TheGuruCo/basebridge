@@ -1,0 +1,4 @@
+// config.js
+module.exports = {
+  BASEBRIDGE_ADDRESS: "0x196b75213A294a5B7502d4FDb5437707Ea156BB1"
+};

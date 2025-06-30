@@ -1,0 +1,23 @@
+{
+  "name": "basebridge",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "@nomiclabs/hardhat-ethers": "^2.2.3",
+    "dotenv": "^17.0.0",
+    "ethers": "^5.8.0",
+    "hardhat": "^2.25.0"
+  },
+  "dependencies": {
+    "keccak256": "^1.0.6",
+    "merkletreejs": "^0.5.2"
+  }
+}
