@@ -1,0 +1,11 @@
+# netlify.toml (at your repo root)
+
+[build]
+  base      = "basebridge-ui"
+  publish   = "basebridge-ui/build"
+  functions = "basebridge-ui/netlify/functions"
+
+[[redirects]]
+  from   = "/*"
+  to     = "/index.html"
+  status = 200
