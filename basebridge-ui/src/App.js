@@ -5,14 +5,18 @@ import "./App.css";
 function App() {
   const [balances, setBalances] = useState([]);
   const [latest, setLatest] = useState({ root: "", timestamp: 0 });
+  const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState("");
   const rpcUrl = process.env.REACT_APP_JSON_RPC_URL;
   const bridgeAddress = process.env.REACT_APP_BASEBRIDGE_ADDRESS;
 
   useEffect(() => {
+    // Load mock balances
     fetch("/balances.json")
       .then((r) => r.json())
       .then(setBalances);
 
+    // Connect to Base Sepolia
     const provider = new ethers.JsonRpcProvider(rpcUrl);
     const bridge = new ethers.Contract(
       bridgeAddress,
@@ -20,6 +24,7 @@ function App() {
       provider
     );
 
+    // Fetch latest on-chain commit
     async function loadLatest() {
       const head = await provider.getBlockNumber();
       const events = await bridge.queryFilter(
@@ -35,7 +40,24 @@ function App() {
     loadLatest();
   }, [rpcUrl, bridgeAddress]);
 
+  // Helper to shorten addresses
   const shorten = (addr) => addr.slice(0, 6) + "…" + addr.slice(-4);
+
+  // Publish handler
+  const handlePublish = async () => {
+    setLoading(true);
+    setMessage("");
+    try {
+      const res = await fetch("/.netlify/functions/publish", { method: "POST" });
+      if (!res.ok) throw new Error(`${res.status} ${res.statusText}`);
+      const { txHash } = await res.json();
+      setMessage(`✅ Published! Tx hash: ${txHash}`);
+    } catch (err) {
+      setMessage(`❌ Publish failed: ${err.message}`);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div className="App">
@@ -61,9 +83,7 @@ function App() {
         <div className="commit-grid">
           <div>
             <span className="label">Merkle Root</span>
-            <code className="mono value">
-              {latest.root || "—"}
-            </code>
+            <code className="mono value">{latest.root || "—"}</code>
           </div>
           <div>
             <span className="label">Timestamp</span>
@@ -76,10 +96,12 @@ function App() {
         </div>
         <button
           className="btn-publish"
-          onClick={() => alert("Wire up your Netlify function here")}
+          onClick={handlePublish}
+          disabled={loading}
         >
-          Publish Now
+          {loading ? "Publishing…" : "Publish Now"}
         </button>
+        {message && <p className="publish-message">{message}</p>}
       </section>
     </div>
   );

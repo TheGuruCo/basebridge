@@ -120,7 +120,21 @@ h2 {
   box-shadow: 0 4px 12px rgba(0, 82, 255, 0.4);
   transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
-.btn-publish:hover {
+.btn-publish:hover:not([disabled]) {
   transform: translateY(-2px);
   box-shadow: 0 6px 20px rgba(0, 82, 255, 0.5);
+}
+.btn-publish:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+/* Publish status message */
+.publish-message {
+  margin-top: 1rem;
+  font-size: 0.95rem;
+  text-align: center;
+}
+.publish-message:first-letter {
+  text-transform: uppercase;
 }
