@@ -4,13 +4,13 @@ const { MerkleTree } = require("merkletreejs");
 const keccak256      = require("keccak256");
 const { ethers }     = require("ethers");
 
+// 1. Load balances from the local copy
+const balances = require("./balances.json");
+
 exports.handler = async (event) => {
   if (event.httpMethod !== "POST") {
     return { statusCode: 405, body: "Method Not Allowed" };
   }
-
-  // 1. Load balances from our public folder
-  const balances = require(`${__dirname}/../../public/balances.json`);
 
   // 2. Build the Merkle tree
   const leaves = balances.map(b =>
