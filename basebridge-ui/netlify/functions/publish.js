@@ -1,10 +1,10 @@
-// basebridge-ui/netlify/functions/publish.js
+// 1. Load env & deps
 require("dotenv").config();
 const { MerkleTree } = require("merkletreejs");
 const keccak256      = require("keccak256");
-const { ethers }     = require("ethers");
+const ethers         = require("ethers");             // ← change here
 
-// 1. Load balances from the local copy
+// 2. Load balances bundled alongside the function
 const balances = require("./balances.json");
 
 exports.handler = async (event) => {
@@ -12,8 +12,8 @@ exports.handler = async (event) => {
     return { statusCode: 405, body: "Method Not Allowed" };
   }
 
-  // 2. Build the Merkle tree
-  const leaves = balances.map(b =>
+  // 3. Build Merkle root
+  const leaves = balances.map((b) =>
     ethers.utils.solidityKeccak256(
       ["address","uint256"],
       [b.address, b.amount]
@@ -23,7 +23,7 @@ exports.handler = async (event) => {
   const root      = tree.getHexRoot();
   const timestamp = Math.floor(Date.now() / 1000);
 
-  // 3. Send commit to Base Sepolia
+  // 4. Commit on-chain
   const provider = new ethers.JsonRpcProvider(process.env.BASEGOERLI_RPC_URL);
   const wallet   = new ethers.Wallet(process.env.PRIVATE_KEY, provider);
   const bridge   = new ethers.Contract(
@@ -37,10 +37,10 @@ exports.handler = async (event) => {
     await tx.wait();
     return {
       statusCode: 200,
-      body: JSON.stringify({ txHash: tx.hash, root, timestamp })
+      body: JSON.stringify({ txHash: tx.hash, root, timestamp }),
     };
-  } catch (e) {
-    console.error(e);
-    return { statusCode: 500, body: e.toString() };
+  } catch (err) {
+    console.error(err);
+    return { statusCode: 500, body: err.toString() };
   }
 };
