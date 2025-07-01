@@ -1,63 +1,4 @@
-:root {
-  --cb-blue:       #0052ff;
-  --cb-dark:       #040652;
-  --cb-light-gray: #f7f7f7;
-  --cb-gray:       #e6e8eb;
-  --radius-lg:     16px;
-  --shadow-md:     0 8px 24px rgba(0, 0, 0, 0.1);
-  --font-mono:     'Courier New', monospace;
-}
-
-body {
-  margin: 0;
-  background: #fafbfc;
-  font-family: 'Inter', sans-serif;
-}
-
-.App {
-  max-width: 960px;
-  margin: 3rem auto;
-  padding: 0 1rem;
-  color: var(--cb-dark);
-}
-
-/* Hero */
-.hero {
-  background: linear-gradient(135deg, var(--cb-dark), var(--cb-blue));
-  border-radius: var(--radius-lg);
-  padding: 2.5rem 1rem;
-  text-align: center;
-  color: white;
-  box-shadow: var(--shadow-md);
-  margin-bottom: 2.5rem;
-}
-.hero h1 {
-  margin: 0;
-  font-size: 2.75rem;
-  letter-spacing: 1px;
-}
-.hero p {
-  margin-top: 0.5rem;
-  opacity: 0.8;
-  font-size: 1.125rem;
-}
-
-/* Section titles */
-h2 {
-  font-size: 1.5rem;
-  color: var(--cb-dark);
-  margin-bottom: 1rem;
-}
-
 /* Balances Grid */
-.balances-section {
-  margin-bottom: 2.5rem;
-}
-.balances-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 1rem;
-}
 .balance-card {
   background: white;
   border-radius: var(--radius-lg);
@@ -65,18 +6,21 @@ h2 {
   padding: 1.25rem;
   text-align: center;
 }
-.balance-addr {
-  display: block;
-  font-family: var(--font-mono);
-  font-size: 0.95rem;
-  color: var(--cb-gray);
-  margin-bottom: 0.5rem;
-}
-.balance-amt {
-  font-size: 1.5rem;
-  font-weight: 600;
-  color: var(--cb-blue);
-}
+- .balance-addr {
+-  display: block;
+-  font-family: var(--font-mono);
+-  font-size: 0.95rem;
+-  color: var(--cb-gray);
+-  margin-bottom: 0.5rem;
+- }
++ .balance-addr {
++  display: block;
++  font-family: var(--font-mono);
++  font-size: 0.95rem;
++  color: var(--cb-dark);        /* use the dark color for legibility */
++  opacity: 0.75;                /* optional slight fade */
++  margin-bottom: 0.5rem;
++ }
 
 /* Commit Section */
 .commit-section {
@@ -93,48 +37,16 @@ h2 {
   flex-wrap: wrap;
   margin-bottom: 1.5rem;
 }
-.label {
-  display: block;
-  font-size: 0.85rem;
-  color: var(--cb-gray);
-  margin-bottom: 0.25rem;
-}
-.value {
-  display: block;
-  background: var(--cb-light-gray);
-  padding: 0.5rem 0.75rem;
-  border-radius: 8px;
-  font-family: var(--font-mono);
-  word-break: break-all;
-  font-size: 0.95rem;
-}
-
-.btn-publish {
-  background: var(--cb-blue);
-  color: white;
-  border: none;
-  padding: 0.75rem 2rem;
-  font-size: 1rem;
-  border-radius: 999px;
-  cursor: pointer;
-  box-shadow: 0 4px 12px rgba(0, 82, 255, 0.4);
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
-}
-.btn-publish:hover:not([disabled]) {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(0, 82, 255, 0.5);
-}
-.btn-publish:disabled {
-  opacity: 0.6;
-  cursor: default;
-}
-
-/* Publish status message */
-.publish-message {
-  margin-top: 1rem;
-  font-size: 0.95rem;
-  text-align: center;
-}
-.publish-message:first-letter {
-  text-transform: uppercase;
-}
+- .label {
+-  display: block;
+-  font-size: 0.85rem;
+-  color: var(--cb-gray);
+-  margin-bottom: 0.25rem;
+- }
++ .label {
++  display: block;
++  font-size: 0.85rem;
++  color: var(--cb-dark);        /* bump this up to the dark color too */
++  font-weight: 500;             /* a little extra weight for clarity */
++  margin-bottom: 0.25rem;
++ }
