@@ -1,19 +1,9 @@
 # netlify.toml (repo root)
 
 [build]
-  base      = "basebridge-ui"
+  # the single command—no base directory needed
+  command   = "npm --prefix basebridge-ui install && npm --prefix basebridge-ui run build"
   publish   = "basebridge-ui/build"
   functions = "basebridge-ui/netlify/functions"
 
-# 1) Allow direct Lambda calls
-[[redirects]]
-  from    = "/.netlify/functions/*"
-  to      = "/.netlify/functions/:splat"
-  status  = 200
-  force   = false
-
-# 2) All other paths → index.html (SPA)
-[[redirects]]
-  from    = "/*"
-  to      = "/index.html"
-  status  = 200
+# (we handle redirects in public/_redirects)
